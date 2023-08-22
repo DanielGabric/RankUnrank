@@ -112,7 +112,7 @@ void unrank(LONG rank, int n, int k, int w[], int isB){
             if(currRank <= rank) left = mid;
             else{
                 w[i] = save;
-                right -= 1;
+                right = mid;
             }
         }
     }

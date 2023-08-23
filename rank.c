@@ -37,28 +37,28 @@ LONG B(int a[], int b[], int n, int p, int k){
 // Compute the unbordered prefix indicator and border indicator of w[1..n] //
 /////////////////////////////////////////////////////////////////////////////
 void populateBorderArrays(int w[], int n, int a[], int b[]){
-    int LPS[n+1],i,len;
+    int PBA[n+1],i,len;
 
-    for(i=1; i<=n; ++i)LPS[i] = a[i] = b[i] = 0;
+    for(i=1; i<=n; ++i)PBA[i] = a[i] = b[i] = 0;
     
     //Computing the unbordered prefix indicator of w[1..n]
     a[1] = 1;
     i = 2;
     len = 0;
     while(i <= n){
-        if(w[i] == w[len+1]) LPS[i++] = (++len);
+        if(w[i] == w[len+1]) PBA[i++] = (++len);
         else{
-            if(len != 0) len = LPS[len];
-            else LPS[i++] = 0;
+            if(len != 0) len = PBA[len];
+            else PBA[i++] = 0;
         }   
-        a[i-1] = (LPS[i-1] == 0);
+        a[i-1] = (PBA[i-1] == 0);
     }
     
     //Computing the border indicator of w[1..n]
     i = n;
-    while(LPS[i] > 0){
-        b[LPS[i]] = 1;
-        i = LPS[i];
+    while(PBA[i] > 0){
+        b[PBA[i]] = 1;
+        i = PBA[i];
     }
 }
 /////////////////////////////////////////////////////
